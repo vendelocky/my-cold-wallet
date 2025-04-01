@@ -47,10 +47,11 @@ const MnemonicGenerator = () => {
       })
       .join('');
   
-    // Since we need 128 bits of entropy for a 12-word mnemonic,
-    // we assume the first 121 bits are provided, and we need to find the last 7 bits of entropy + 4-bit checksum
-    // Total bits needed = 128 (entropy) + 4 (checksum) = 132 bits
-    // 11 words = 121 bits, so we need 11 more bits for the 12th word
+    /** Since we need 128 bits of entropy for a 12-word mnemonic,
+     * we assume the first 121 bits are provided, and we need to find the last 7 bits of entropy + 4-bit checksum
+     * Total bits needed = 128 (entropy) + 4 (checksum) = 132 bits
+     * 11 words = 121 bits, so we need 11 more bits for the 12th word
+    */
   
     // Convert the 121 bits to bytes (truncate to 15 bytes + 7 bits)
     const entropyBitsPadded = entropyBits.padEnd(128, '0'); // Pad to 128 bits
@@ -81,7 +82,7 @@ const MnemonicGenerator = () => {
     /** Automatically calculate the 12th word when the first 11 words are filled and
      *  filter out 12th empty strings (because we started with length of 12 in the selectedWords array)
     */
-    const filledWords = newWords.filter(word => word !== '' && word.trim().length > 0);
+    const filledWords = newWords.slice(0, 11).filter(word => word !== '' && word.trim().length > 0);
     if (filledWords.length >= 11) {
       findLastWord(filledWords);
     }
