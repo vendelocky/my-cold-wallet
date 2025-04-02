@@ -115,7 +115,7 @@ const MnemonicGenerator = () => {
         <Button variant="contained" color="info" onClick={() => navigate('/')}>
           Go Back to Main Page
         </Button>
-        <Box sx={{m: 4}}>Create your own Mnemonic Seed Phrase</Box>
+        <Box sx={{m: 4, color: 'black'}}>Create your own Mnemonic Seed Phrase</Box>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
           {Array.from({ length: 12 }, (_, index) => (
             <Box key={index} sx={{ width: { xs: '100%', sm: 'calc(50% - 16px)', md: 'calc(33.33% - 16px)' }, }} >
