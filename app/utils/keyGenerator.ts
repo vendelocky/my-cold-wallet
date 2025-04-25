@@ -2,12 +2,14 @@ import * as bip39 from 'bip39';
 import * as ethWallet from 'ethereumjs-wallet';
 import { saveAs } from 'file-saver';
 
+const EVM_PATH = "m/44'/60'/0'/0/0";
+
 export const generateKeys = (mnemonic: string, saltPhrase: string) => {
   // Generate seed from mnemonic and salt phrase
   const seed = bip39.mnemonicToSeedSync(mnemonic, saltPhrase);
 
   // Generate Ethereum wallet from seed
-  const wallet = ethWallet.hdkey.fromMasterSeed(seed).getWallet();
+  const wallet = ethWallet.hdkey.fromMasterSeed(seed).derivePath(EVM_PATH).getWallet();
 
   // Get keys and address
   const privateKey = wallet.getPrivateKeyString();
